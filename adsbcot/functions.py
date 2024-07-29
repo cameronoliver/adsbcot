@@ -218,7 +218,7 @@ def adsb_to_cot_xml(  # NOQA pylint: disable=too-many-locals,too-many-branches,t
 
     track: ET.Element = ET.Element("track")
     track.set("course", str(craft.get("trk", craft.get("track", "9999999.0"))))
-    track.set("speed", aircot.functions.get_speed(craft.get("gs")))
+    track.set("speed", aircot.functions.get_speed(craft.get("speed")))
 
     detail = ET.Element("detail")
 
@@ -245,8 +245,8 @@ def adsb_to_cot_xml(  # NOQA pylint: disable=too-many-locals,too-many-branches,t
         "ce": str(craft.get("nac_p", "9999999.0")),
         "le": str(craft.get("nac_v", "9999999.0")),
         "hae": aircot.functions.get_hae(
-            craft.get("alt_geom")
-        ),  # Multiply alt_geom by "Clarke 1880 (international foot)"
+            craft.get("altitude")
+        ),  # Multiply altitude by "Clarke 1880 (international foot)"
         "uid": cot_uid,
         "cot_type": cot_type,
         "stale": cot_stale,
